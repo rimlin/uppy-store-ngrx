@@ -57,7 +57,7 @@ class NgrxStore<T> implements INgrxStore<T> {
   }
 
   subscribe(cb): Function {
-    const unsub$ = new Subject();
+    const unsub$: Subject<boolean> = new Subject<boolean>();
 
     let prevState = this.getState();
 
@@ -69,7 +69,7 @@ class NgrxStore<T> implements INgrxStore<T> {
       }
     });
 
-    return () => unsub$.next();
+    return () => unsub$.next(true);
   }
 
   getStore(): Store<State> {
