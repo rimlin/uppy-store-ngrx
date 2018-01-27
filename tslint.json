@@ -1,0 +1,47 @@
+{
+	"rulesDirectory": [
+	  "node_modules/codelyzer"
+	],
+	"extends": ["angular-tslint-rules"],
+	"rules": {
+	  "trailing-comma": [
+		true
+	  ],
+	  "variable-name": [
+		true,
+		"allow-leading-underscore",
+		"ban-keywords"
+	  ],
+	  "prefer-conditional-expression": false,
+	  "curly": true,
+	  "no-null-keyword": false,
+	  "component-selector": [
+		true,
+		"element",
+		[
+		  "wf",
+		  "test"
+		],
+		"kebab-case"
+	  ],
+	  "directive-selector": [
+		true,
+		"attribute",
+		[
+		  "wf",
+		  "test"
+		],
+		"camelCase"
+	  ],
+	  "pipe-naming": [true, "camelCase", "wf"],
+	  "templates-use-public": false,
+	  "no-access-missing-member": false,
+	  "invoke-injectable": false,
+	  "template-to-ng-template": false,
+	  "prefer-function-over-method": false,
+	  "no-angle-bracket-type-assertion": false,
+	  "component-class-suffix": false,
+	  "no-console": false
+	}
+}
+  
