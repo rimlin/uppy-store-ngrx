@@ -1,23 +1,21 @@
 {
   "compilerOptions": {
-    "sourceMap": false,
+    "target": "es5",
     "declaration": true,
+    "module": "commonjs",
+    "sourceMap": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "target": "es5",
-    "module": "es2015",
+    "rootDir": ".",
     "types": ["dist/index.d.ts"],
     "outDir": "dist",
     "baseUrl": "src"
   },
   "exclude": [
     "node_modules",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "dist"
   ]
 }
