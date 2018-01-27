@@ -1,6 +1,6 @@
 {
   "name": "uppy-store-ngrx",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple Ngrx Store for Uppy",
   "main": "index.ts",
   "scripts": {
