@@ -60,7 +60,7 @@ export class UploaderService {
     private store: Store<fromRoot.State>
   ) {
     this.uppy = Uppy({
-      store: createNgrxStore<INgrxStore<MyFile>, MyFile>({
+      store: createNgrxStore<fromRoot.State, MyFile>({
         store: this.store,
       }),
     });

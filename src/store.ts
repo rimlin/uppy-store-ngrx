@@ -14,26 +14,27 @@ const DEFAULT_STATE_ID = 'uppy';
 // Pluck Uppy state from the Ngrx store in the default location.
 const defaultSelector = id => state => state[id];
 
-export interface NgrxStoreOptions {
-  store: Store<State>;
+export interface NgrxStoreOptions<T, U> {
+  store: any; // Store<T>
   id?: any;
   selector?: any;
 }
 
-export interface INgrxStore<T> {
-  getStore(): Store<State>;
-  getFiles(): Observable<UppyFiles<T>>;
+export interface INgrxStore<T, U> {
+  getStore(): Store<T>;
+  getFiles(): Observable<UppyFiles<U>>;
 }
 
 /**
- * T - interface of custom file;
+ * T - interface of root state;
+ * U - interface of custom file;
  */
-class NgrxStore<T> implements INgrxStore<T> {
-  _store: Store<State>;
+export class NgrxStore<T, U> implements INgrxStore<T, U> {
+  _store: Store<T>;
   _id: any;
   _selector: any;
 
-  constructor(opts: NgrxStoreOptions) {
+  constructor(opts: NgrxStoreOptions<T, U>) {
     this._store = opts.store;
     this._id = opts.id || DEFAULT_STATE_ID;
     this._selector = opts.selector || defaultSelector(this._id);
@@ -72,16 +73,17 @@ class NgrxStore<T> implements INgrxStore<T> {
     return () => unsub$.next(true);
   }
 
-  getStore(): Store<State> {
+  // Store<T>
+  getStore(): any {
     return this._store.select(this._selector);
   }
 
-  getFiles(): Observable<UppyFiles<T>> {
+  // Observable<UppyFiles<U>>
+  getFiles(): any {
     return this.getStore().select((state: State) => state.files);
   }
 }
 
-
-export function createNgrxStore<T>(opts: NgrxStoreOptions): NgrxStore<T> {
-  return new NgrxStore<T>(opts);
+export function createNgrxStore<T, U>(opts: NgrxStoreOptions<T, U>): NgrxStore<T, U> {
+  return new NgrxStore<T, U>(opts);
 }
