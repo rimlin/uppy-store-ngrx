@@ -41,6 +41,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Uppy from 'uppy/lib/core/Core';
 import { Observable } from 'rxjs/Observable';
+import { map, take } from 'rxjs/operators';
 import { createNgrxStore, INgrxStore, IUppy, UppyFile, UppyFiles, FileType } from 'uppy-store-ngrx';
 
 import * as fromRoot from './reducers';
@@ -67,13 +68,13 @@ export class UploaderService {
 
   // Async method to get files from Uppy state
   getFilesStream(): Observable<Array<UppyFile<MyFile>>> {
-    return this.uppy.store.getFiles().map(files => (<any> Object).values(files));
+    return this.uppy.store.getFiles().pipe(map(files => (<any> Object).values(files)));
   }
 
   // Sync method to get files from Uppy state
   getFiles(): Array<UppyFile<MyFile>> {
     let files: Array<UppyFile<MyFile>> = [];
-    this.getFilesStream().take(1).subscribe(_files => files = _files);
+    this.getFilesStream().pipe(take(1)).subscribe(_files => files = _files);
 
     return files;
   }

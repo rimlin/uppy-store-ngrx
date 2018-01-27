@@ -39,6 +39,10 @@ export interface UppyFiles<T> {
   [key: string]: UppyFile<T>;
 }
 
+/**
+ * T - interface of Uppy Store;
+ * U - interface of custom file;
+ */
 export interface IUppy<T, U> {
   id: UppyId;
   autoProceed: boolean;

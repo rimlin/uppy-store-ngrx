@@ -1,5 +1,5 @@
 import { Action, Store, select } from '@ngrx/store';
-import { take, takeUntil } from 'rxjs/operators';
+import { take, takeUntil, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -7,29 +7,33 @@ import { getPatch } from './utils';
 import { UppyFiles, Meta } from './interfaces';
 import { State } from './reducers';
 import * as StoreActions from './actions';
+import { UppyFile } from '../index';
 
 const DEFAULT_STATE_ID = 'uppy';
 
 // Pluck Uppy state from the Ngrx store in the default location.
 const defaultSelector = id => state => state[id];
 
-export interface NgrxStoreOptions<T> {
-  store: Store<T>;
+export interface NgrxStoreOptions {
+  store: Store<State>;
   id?: any;
   selector?: any;
 }
 
 export interface INgrxStore<T> {
-  getStore(): Store<any>;
+  getStore(): Store<State>;
   getFiles(): Observable<UppyFiles<T>>;
 }
 
-class NgrxStore<T, U> implements INgrxStore<U> {
-  _store: Store<T>;
+/**
+ * T - interface of custom file;
+ */
+class NgrxStore<T> implements INgrxStore<T> {
+  _store: Store<State>;
   _id: any;
   _selector: any;
 
-  constructor(opts) {
+  constructor(opts: NgrxStoreOptions) {
     this._store = opts.store;
     this._id = opts.id || DEFAULT_STATE_ID;
     this._selector = opts.selector || defaultSelector(this._id);
@@ -68,16 +72,16 @@ class NgrxStore<T, U> implements INgrxStore<U> {
     return () => unsub$.next();
   }
 
-  getStore(): Store<any> {
+  getStore(): Store<State> {
     return this._store.select(this._selector);
   }
 
-  getFiles(): Observable<UppyFiles<U>> {
+  getFiles(): Observable<UppyFiles<T>> {
     return this.getStore().select((state: State) => state.files);
   }
 }
 
 
-export function createNgrxStore<T, U>(opts): NgrxStore<T, U> {
-  return new NgrxStore<T, U>(opts);
+export function createNgrxStore<T>(opts: NgrxStoreOptions): NgrxStore<T> {
+  return new NgrxStore<T>(opts);
 }
