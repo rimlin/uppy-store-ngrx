@@ -2,7 +2,8 @@
   "name": "uppy-store-ngrx",
   "version": "0.0.4",
   "description": "Simple Ngrx Store for Uppy",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,9 +17,9 @@
     "url": "https://github.com/rimlin/uppy-store-ngrx/issues"
   },
   "homepage": "https://github.com/rimlin/uppy-store-ngrx#readme",
-  "dependencies": {
-    "@ngrx/store": "^5.0.0",
-    "rxjs": "^5.5.6"
+  "peerDependencies": {
+    "@ngrx/store": "^4.0.0",
+    "rxjs": "^5.0.0"
   },
   "devDependencies": {
     "angular-tslint-rules": "^1.2.1"
