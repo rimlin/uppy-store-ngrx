@@ -14,7 +14,7 @@ const DEFAULT_STATE_ID = 'uppy';
 const defaultSelector = id => state => state[id];
 
 export interface NgrxStoreOptions<T, U> {
-  store: Store<T>
+  store: Store<T>;
   id?: any;
   selector?: any;
 }

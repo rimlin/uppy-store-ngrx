@@ -7,6 +7,12 @@ export type InfoType = 'info' | 'warning' | 'success' | 'error';
 
 export enum FileType {
   IMAGE_JPEG = <any> 'image/jpeg',
+  IMAGE_PNG = <any> 'image/png',
+  IMAGE_GIF = <any> 'image/gif',
+  VIDEO_MPEG = <any> 'video/mpeg',
+  VIDEO_MP4 = <any> 'video/mp4',
+  VIDEO_OGG = <any> 'video/ogg',
+  VIDEO_WEBM = <any> 'video/webm'
 }
 
 export interface UppyFile<T> {
