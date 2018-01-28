@@ -53,8 +53,8 @@ export interface MyFile {
 
 @Injectable()
 export class UploaderService {
-  private uppy: IUppy<INgrxStore<MyFile>, MyFile>;
-
+  private uppy: IUppy<INgrxStore<fromRoot.State, MyFile>, MyFile>;
+  
   constructor(
     private store: Store<fromRoot.State>
   ) {
