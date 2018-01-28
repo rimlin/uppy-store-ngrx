@@ -14,7 +14,7 @@ const DEFAULT_STATE_ID = 'uppy';
 const defaultSelector = id => state => state[id];
 
 export interface NgrxStoreOptions<T, U> {
-  store: any; // Store<T>
+  store: Store<T>
   id?: any;
   selector?: any;
 }
@@ -72,13 +72,11 @@ export class NgrxStore<T, U> implements INgrxStore<T, U> {
     return () => unsub$.next(true);
   }
 
-  // Store<T>
-  getStore(): any {
+  getStore(): Store<any> {
     return this._store.select(this._selector);
   }
 
-  // Observable<UppyFiles<U>>
-  getFiles(): any {
+  getFiles(): Observable<UppyFiles<U>> {
     return this.getStore().select((state: State) => state.files);
   }
 }
