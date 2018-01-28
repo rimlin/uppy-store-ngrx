@@ -11,7 +11,7 @@ $ npm install uppy-store-ngrx --save
 
 ### Usages
 
-1. Connect UppyStoreNgrx to your reducers:
+1. Connect UppyStoreNgrx to your reducers. At this example state name of Uppy store is default `uppy`. 
 
 *reducers.ts*
 ```
@@ -41,7 +41,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Uppy from 'uppy/lib/core/Core';
 import { Observable } from 'rxjs/Observable';
-import { map, take } from 'rxjs/operators';
 import { createNgrxStore, INgrxStore, IUppy, UppyFile, UppyFiles, FileType } from 'uppy-store-ngrx';
 
 import * as fromRoot from './reducers';
@@ -68,13 +67,13 @@ export class UploaderService {
 
   // Async method to get files from Uppy state
   getFilesStream(): Observable<Array<UppyFile<MyFile>>> {
-    return this.uppy.store.getFiles().pipe(map(files => (<any> Object).values(files)));
+    return this.uppy.store.getFiles().map(files => (<any> Object).values(files));
   }
 
   // Sync method to get files from Uppy state
   getFiles(): Array<UppyFile<MyFile>> {
     let files: Array<UppyFile<MyFile>> = [];
-    this.getFilesStream().pipe(take(1)).subscribe(_files => files = _files);
+    this.getFilesStream().take(1).subscribe(_files => files = _files);
 
     return files;
   }
@@ -82,3 +81,9 @@ export class UploaderService {
 
 ```
 
+Function `createNgrxStore` support next options:
+``` 
+store: Store<T>; // Ngrx store.
+id?: any; // Name of Uppy store in Ngrx state. Default is uppy.
+selector?: any; // Selector to select Uppy store from Ngrx state.
+```
