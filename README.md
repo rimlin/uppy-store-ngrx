@@ -2,7 +2,7 @@
 [![npm](https://img.shields.io/npm/l/uppy-store-ngrx.svg?maxAge=2592000)]()
 [![npm version](https://badge.fury.io/js/uppy-store-ngrx.svg)](https://badge.fury.io/js/uppy-store-ngrx)
 
-Produce opportunity to use Ngrx state as a state of Uppy Store. Also package provide interfaces to convenient work Uppy with TypeScript.
+Produce opportunity to use Ngrx state as a state of Uppy Store. Also package provides interfaces to convenient work Uppy with TypeScript.
 
 ### Installation
 ```
@@ -11,7 +11,7 @@ $ npm install uppy-store-ngrx --save
 
 ### Usages
 
-1. Connect UppyStoreNgrx to your reducers. At this example state name of Uppy store is default `uppy`. 
+1. Connect UppyStoreNgrx to your reducers. In this example for state name of Uppy store uses default value `uppy`. 
 
 *reducers.ts*
 ```
@@ -81,9 +81,9 @@ export class UploaderService {
 
 ```
 
-Function `createNgrxStore` support next options:
+Function `createNgrxStore` supports next options:
 ``` 
 store: Store<T>; // Ngrx store.
-id?: any; // Name of Uppy store in Ngrx state. Default is uppy.
+id?: any; // Name of Uppy store in Ngrx state. Default name is `uppy`.
 selector?: any; // Selector to select Uppy store from Ngrx state.
 ```
