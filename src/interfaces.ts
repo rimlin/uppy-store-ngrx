@@ -20,10 +20,11 @@ export interface UppyFile<T> {
   extension: string;
   id: string;
   isRemote: boolean;
-  meta: {
+  meta: Partial<{
     name: string;
-    type: FileType;
-  };
+    type: FileType | any;
+    [key: string]: any;
+  }>;
   name: string;
   preview: string;
   progress: {
@@ -36,7 +37,7 @@ export interface UppyFile<T> {
   remote: string;
   size: number;
   source: string;
-  type: FileType;
+  type: FileType | any;
   error?: string;
   uploadURL?: T;
 }
@@ -70,7 +71,7 @@ export interface IUppy<T, U> {
   getId(): UppyId;
   addFile(fileObject: {
     name: string;
-    type: FileType;
+    type: FileType | any;
     data: File;
     source?: string;
     isRemote?: boolean;
