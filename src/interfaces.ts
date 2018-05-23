@@ -64,8 +64,8 @@ export interface IUppy<T, U> {
   locale: string;
   store: T;
   thumbnailGeneration: boolean;
-  onBeforeFileAdded(currentFile: UppyFile<U>, files: UppyFiles<U>): Promise<any>;
-  onBeforeUpload(files: UppyFiles<U>, done: boolean): Promise<any>;
+  onBeforeFileAdded(currentFile: UppyFile<U>, files: UppyFiles<U>): UppyFile<U>;
+  onBeforeUpload(files: UppyFiles<U>, done: boolean): UppyFile<U>;
   use(plugin: Object, opts: Object): void;
   run(): void;
   getId(): UppyId;
@@ -75,6 +75,7 @@ export interface IUppy<T, U> {
     data: File;
     source?: string;
     isRemote?: boolean;
+    meta?: object;
   }): Promise<any>;
   removeFile(fileID: FileId): void;
   getFile(fileID: FileId): UppyFile<U>;
