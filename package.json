@@ -19,9 +19,10 @@
   "homepage": "https://github.com/rimlin/uppy-store-ngrx#readme",
   "peerDependencies": {
     "@ngrx/store": "^4.0.0",
-    "rxjs": "^5.0.0"
+    "rxjs": "^6.4.0"
   },
   "devDependencies": {
     "angular-tslint-rules": "^1.2.1"
-  }
+  },
+  "dependencies": {}
 }

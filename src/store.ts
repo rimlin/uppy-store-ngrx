@@ -1,6 +1,6 @@
 import { Action, Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 import { getPatch } from './utils';
 import { UppyFiles, Meta } from './interfaces';
@@ -51,7 +51,7 @@ export class NgrxStore<T, U> implements INgrxStore<T, U> {
 
   getState(): any {
     let state;
-    this._store.select(this._selector).take(1).subscribe(s => state = s);
+    this._store.select(this._selector).pipe(take(1)).subscribe(s => state = s);
 
     return state;
   }
@@ -61,7 +61,7 @@ export class NgrxStore<T, U> implements INgrxStore<T, U> {
 
     let prevState = this.getState();
 
-    this._store.takeUntil(unsub$).subscribe(nextState => {
+    this._store.pipe(takeUntil(unsub$)).subscribe(nextState => {
       if (prevState !== nextState) {
         const patch = getPatch(prevState, nextState);
         cb(prevState, nextState, patch);
