@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,8 @@
   "devDependencies": {
     "angular-tslint-rules": "^1.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@ngrx/store": "^7.3.0",
+    "rxjs": "^6.4.0"
+  }
 }

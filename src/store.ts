@@ -20,7 +20,7 @@ export interface NgrxStoreOptions<T, U> {
 }
 
 export interface INgrxStore<T, U> {
-  getStore(): Store<T>;
+  getStore(): Observable<Store<any>>;
   getFiles(): Observable<UppyFiles<U>>;
 }
 
@@ -72,12 +72,12 @@ export class NgrxStore<T, U> implements INgrxStore<T, U> {
     return () => unsub$.next(true);
   }
 
-  getStore(): Store<any> {
-    return this._store.select(this._selector);
+  getStore(): Observable<Store<any>> {
+    return this._store.pipe(select(this._selector));
   }
 
   getFiles(): Observable<UppyFiles<U>> {
-    return this.getStore().select((state: State) => state.files);
+    return this.getStore().pipe(select('files'));
   }
 }
 
